@@ -8,10 +8,10 @@ jobs:
   build:
     needs: setup
     runs-on: ubuntu-18.04
-      steps:
-        - run: echo "Build job done!"
+    steps:
+      - run: echo "Build job done!"
   test:
     needs: build
     runs-on: ubuntu-18.04
-      steps:
-        - run: echo "Test job done!"
+    steps:
+      - run: echo "Test job done!"
