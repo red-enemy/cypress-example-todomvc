@@ -1,29 +1,17 @@
-name: E2E2
+name: E2E2-multiple
 on: [push]
 jobs:
-  cypress-run:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Run E2E tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: "npm run start:ci"
-          wait-on: "http://localhost:8888"
-          # let's see if the Test Runner handles url in the config
-          # https://github.com/cypress-io/cypress/issues/5466
-          config: baseUrl=http://localhost:8888
-  cypress-run2:
+  setup:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Run E2E tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: "npm run start:ci"
-          wait-on: "http://localhost:8888"
-          # let's see if the Test Runner handles url in the config
-          # https://github.com/cypress-io/cypress/issues/5466
-          config: baseUrl=http://localhost:8888
+      - run: echo "Setup job done!"
+  build:
+    needs: setup
+    runs-on: ubuntu-18.04
+      steps:
+        - run: echo "Build job done!"
+  test:
+    needs: build
+    runs-on: ubuntu-18.04
+      steps:
+        - run: echo "Test job done!"
